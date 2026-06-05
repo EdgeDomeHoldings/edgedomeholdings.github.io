@@ -43,8 +43,14 @@ export default function MagicalIntake() {
       {state === 'S0_SPARK' && (
         <div className="animate-fade-in">
           <h1 className="text-4xl font-light tracking-tight mb-8">Prophesy your venture.</h1>
-          <button onClick={handleMicToggle} className={`w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 ${isListening ? 'bg-red-500 animate-pulse scale-110' : 'bg-neutral-900 border border-neutral-700 hover:border-white'}`}>
-            <span className="text-sm font-mono tracking-widest">{isListening ? "STOP" : "MIC"}</span>
+          <button onClick={handleMicToggle} aria-label="Toggle Voice Prophecy" className={`w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 focus:outline-none ${isListening ? 'bg-red-500 animate-pulse scale-110' : 'bg-neutral-900 border border-neutral-700 hover:border-white'}`}>
+            {isListening ? (
+              <span className="text-xs font-mono font-bold tracking-widest">STOP</span>
+            ) : (
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 1v11m0 0a4 4 0 01-4-4V5a4 4 0 118 0v4a4 4 0 01-4 4zm0 0v4m0 0a7 7 0 01-7-7M12 20a7 7 0 007-7" />
+              </svg>
+            )}
           </button>
           <p className="mt-4 text-xs font-mono text-neutral-500">Tap to speak to your virtual co-founder</p>
         </div>
