@@ -25,6 +25,22 @@
     <!-- Hero / Main Showcase -->
     <main class="max-w-4xl mx-auto px-6 py-16 flex-grow flex flex-col justify-center">
         
+        <!-- Input Node: Prophesy Generator -->
+        <div class="border border-purple-900/40 bg-[#1f2833]/15 rounded-2xl p-6 md:p-8 mb-10 glow">
+            <h2 class="text-sm font-bold text-slate-300 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span class="text-indigo-400">⚡</span> Prophesy Your Infrastructure
+            </h2>
+            <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+                Enter a custom business concept or startup model below to forge completely dynamic operational criteria.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <input type="text" id="prophesy-input" placeholder="e.g. An automated eco-friendly mobile car wash subscription application." class="flex-grow bg-[#0b0c10] border border-purple-950 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 transition placeholder:text-slate-600">
+                <button onclick="manifestVenture()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-xl transition duration-200 shadow-md whitespace-nowrap">
+                    Manifest Venture
+                </button>
+            </div>
+        </div>
+
         <!-- Case Study Block -->
         <div class="border border-purple-900/40 bg-[#1f2833]/20 rounded-2xl p-8 md:p-12 glow">
             
@@ -33,28 +49,28 @@
                 <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Live Case Study Showcase</span>
             </div>
 
-            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+            <h1 id="showcase-name" class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
                 EverythingPops
             </h1>
 
-            <p class="text-lg md:text-xl text-[#86c232] font-semibold mb-8">
+            <p id="showcase-tagline" class="text-lg md:text-xl text-[#86c232] font-semibold mb-8">
                 Premium, small-batch gourmet popcorn brand.
             </p>
 
             <div class="space-y-6 border-t border-purple-950/40 pt-8 text-sm md:text-base">
                 <div>
                     <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">1-Sentence Pitch</h3>
-                    <p class="text-slate-300">A premium, small-batch gourmet popcorn brand delivering high-energy, custom-flavored snack experiences for local communities, events, and gift-givers.</p>
+                    <p id="showcase-pitch" class="text-slate-300">A premium, small-batch gourmet popcorn brand delivering high-energy, custom-flavored snack experiences for local communities, events, and gift-givers.</p>
                 </div>
 
                 <div>
                     <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Target Audience</h3>
-                    <p class="text-slate-300">Local families, school boosters, corporate event planners, and online snack enthusiasts.</p>
+                    <p id="showcase-audience" class="text-slate-300">Local families, school boosters, corporate event planners, and online snack enthusiasts.</p>
                 </div>
 
                 <div>
                     <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Core Strategy</h3>
-                    <p class="text-slate-300">Direct-to-consumer sales via local pop-ups, farmers' markets, school booster partnerships, and online subscription gift boxes.</p>
+                    <p id="showcase-strategy" class="text-slate-300">Direct-to-consumer sales via local pop-ups, farmers' markets, school booster partnerships, and online subscription gift boxes.</p>
                 </div>
             </div>
 
@@ -111,7 +127,7 @@
             
             <div class="text-center mb-6">
                 <span class="text-xs bg-purple-950 border border-purple-800 text-purple-300 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Stripe Sandbox Integration</span>
-                <h3 class="text-xl font-bold text-white mt-3">Deploy EverythingPops (Starter)</h3>
+                <h3 id="modal-title" class="text-xl font-bold text-white mt-3">Deploy EverythingPops (Starter)</h3>
                 <p class="text-xs text-slate-400 mt-1">Order processed securely via EdgeDome Holdings LLC sandbox.</p>
             </div>
 
@@ -175,6 +191,95 @@
 
     <!-- Interactive Logic -->
     <script>
+        // State container (Master Variable Forge)
+        const state = {
+            name: "EverythingPops",
+            tagline: "Premium, small-batch gourmet popcorn brand.",
+            pitch: "A premium, small-batch gourmet popcorn brand delivering high-energy, custom-flavored snack experiences for local communities, events, and gift-givers.",
+            audience: "Local families, school boosters, corporate event planners, and online snack enthusiasts.",
+            strategy: "Direct-to-consumer sales via local pop-ups, farmers' markets, school booster partnerships, and online subscription gift boxes."
+        };
+
+        const defaultCase = { ...state };
+
+        function renderState() {
+            document.getElementById('showcase-name').textContent = state.name;
+            document.getElementById('showcase-tagline').textContent = state.tagline;
+            document.getElementById('showcase-pitch').textContent = state.pitch;
+            document.getElementById('showcase-audience').textContent = state.audience;
+            document.getElementById('showcase-strategy').textContent = state.strategy;
+
+            // Sync with Stripe Sandbox Modal
+            document.getElementById('modal-title').textContent = `Deploy ${state.name} (Starter)`;
+        }
+
+        function manifestVenture() {
+            const inputVal = document.getElementById('prophesy-input').value.trim();
+            if (!inputVal) {
+                // Restore defaults
+                Object.assign(state, defaultCase);
+                renderState();
+                return;
+            }
+
+            const clean = inputVal.toLowerCase();
+            
+            const isEco = clean.includes('eco') || clean.includes('green') || clean.includes('sustain') || clean.includes('earth');
+            const isWash = clean.includes('wash') || clean.includes('clean') || clean.includes('car') || clean.includes('suds') || clean.includes('detail');
+            const isMobile = clean.includes('mobile') || clean.includes('demand') || clean.includes('delivery') || clean.includes('van') || clean.includes('truck');
+            const isSub = clean.includes('sub') || clean.includes('recur') || clean.includes('membership') || clean.includes('plan');
+
+            let finalName = "";
+            let finalTagline = "";
+            let finalPitch = "";
+            let finalAudience = "";
+            let finalStrategy = "";
+
+            if (isWash) {
+                let prefix = isEco ? "Eco" : "Hydro";
+                let core = "Suds";
+                let suffix = isSub ? "Flow" : "Go";
+                
+                if (isMobile && isEco && isSub) {
+                    finalName = "EcoWash Flow";
+                    finalTagline = "On-demand, zero-waste premium auto cleaning subscription.";
+                    finalPitch = "An eco-friendly, cloud-managed mobile detailing platform offering sub-second booking and premium waterless care delivered directly to your driveway.";
+                    finalAudience = "Busy suburban professionals, eco-conscious corporate fleet managers, and high-frequency business travelers.";
+                    finalStrategy = "A dynamic route-optimized regional service footprint offering monthly subscription tiers and automated scheduling integration via a custom client PWA.";
+                } else {
+                    finalName = `${prefix}${core}${suffix}`;
+                    finalTagline = `On-demand ${isEco ? 'sustainable' : 'premium'} automotive detailing and washing.`;
+                    finalPitch = `A next-generation mobile-enabled service stack providing precision vehicle washing and detailing with custom tailored solutions.`;
+                    finalAudience = `High-end vehicle owners, suburban families, and commercial fleet owners.`;
+                    finalStrategy = `Targeted digital outreach paired with regional operations management modules for frictionless booking.`;
+                }
+            } else {
+                const tokens = inputVal.split(/\s+/).filter(w => w.length > 3 && !["with", "your", "that", "this", "from", "concept", "conceptual", "model", "application", "platform"].includes(w.toLowerCase()));
+                const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+                
+                let noun = tokens.length > 0 ? cap(tokens[tokens.length - 1].replace(/[^a-zA-Z]/g, "")) : "Venture";
+                let adj = tokens.length > 1 ? cap(tokens[0].replace(/[^a-zA-Z]/g, "")) : "Alpha";
+                
+                if (noun.toLowerCase() === "application" || noun.toLowerCase() === "app") {
+                    noun = tokens.length > 1 ? cap(tokens[tokens.length - 2].replace(/[^a-zA-Z]/g, "")) : "App";
+                }
+
+                finalName = `${adj}${noun}`;
+                finalTagline = `Hyper-efficient turnkey operations specialized for ${inputVal.toLowerCase()}.`;
+                finalPitch = `A context-optimized digital infrastructure built to orchestrate and scale: "${inputVal}".`;
+                finalAudience = `Targeted industry demographics, modern digital-first users, and enterprise clients seeking agile workflows.`;
+                finalStrategy = `Rapid deployment of localized branding funnels, optimized digital touchpoints, and custom search marketing pipelines.`;
+            }
+
+            state.name = finalName;
+            state.tagline = finalTagline;
+            state.pitch = finalPitch;
+            state.audience = finalAudience;
+            state.strategy = finalStrategy;
+
+            renderState();
+        }
+
         function openStripeModal() {
             document.getElementById('stripeModal').classList.remove('hidden');
             document.getElementById('payment-form').classList.remove('hidden');
@@ -194,6 +299,8 @@
             setTimeout(() => {
                 document.getElementById('payment-form').classList.add('hidden');
                 document.getElementById('payment-success').classList.remove('hidden');
+                btn.innerHTML = `Authorize & Launch ($499.00)`;
+                btn.disabled = false;
             }, 1800);
         }
     </script>
