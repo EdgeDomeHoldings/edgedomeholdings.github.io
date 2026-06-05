@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Stripe.js client library -->
     <script src="https://js.stripe.com/v3/"></script>
-    <link rel="manifest" href="manifest.json">
+    <link class="manifest" href="manifest.json">
     <style>
         .glow { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
         .modal-blur { backdrop-filter: blur(8px); }
@@ -42,85 +42,89 @@
             </div>
         </div>
 
-        <!-- Case Study Block -->
-        <div class="border border-purple-900/40 bg-[#1f2833]/20 rounded-2xl p-8 md:p-12 glow">
+        <!-- Case Study Block (Hidden initially for sequential conditional access) -->
+        <div id="showcase-results" style="display: none;" class="space-y-16">
             
-            <div class="flex items-center gap-3 mb-6">
-                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Live Case Study Showcase</span>
+            <!-- Case Study Block -->
+            <div class="border border-purple-900/40 bg-[#1f2833]/20 rounded-2xl p-8 md:p-12 glow scroll-mt-24" id="showcase-container">
+                
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Live Case Study Showcase</span>
+                </div>
+
+                <h1 id="showcase-name" class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+                    EverythingPops
+                </h1>
+
+                <p id="showcase-tagline" class="text-lg md:text-xl text-[#86c232] font-semibold mb-8">
+                    Premium, small-batch gourmet popcorn brand.
+                </p>
+
+                <div class="space-y-6 border-t border-purple-950/40 pt-8 text-sm md:text-base">
+                    <div>
+                        <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">1-Sentence Pitch</h3>
+                        <p id="showcase-pitch" class="text-slate-300">A premium, small-batch gourmet popcorn brand delivering high-energy, custom-flavored snack experiences for local communities, events, and gift-givers.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Target Audience</h3>
+                        <p id="showcase-audience" class="text-slate-300">Local families, school boosters, corporate event planners, and online snack enthusiasts.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Core Strategy</h3>
+                        <p id="showcase-strategy" class="text-slate-300">Direct-to-consumer sales via local pop-ups, farmers' markets, school booster partnerships, and online subscription gift boxes.</p>
+                    </div>
+                </div>
+
             </div>
 
-            <h1 id="showcase-name" class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-                EverythingPops
-            </h1>
+            <!-- Next Steps Call to Action -->
+            <div class="border-t border-purple-950/40 pt-12">
+                <h2 class="text-2xl font-black text-white text-center mb-8">Next Steps: How Would You Like to Build This?</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Option A -->
+                    <div class="border border-[#1f2833] bg-[#1f2833]/10 rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-white font-bold mb-2 text-lg">Option A</h3>
+                            <p class="text-xs text-purple-400 mb-4 font-semibold uppercase tracking-widest">DIY Route (Free)</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">(Take this strategy and build it yourself! (Proprietary EdgeDome backend platforms and systems remain sole IP of EdgeDome Holdings, LLC).</p>
+                        </div>
+                    </div>
 
-            <p id="showcase-tagline" class="text-lg md:text-xl text-[#86c232] font-semibold mb-8">
-                Premium, small-batch gourmet popcorn brand.
-            </p>
+                    <!-- Option B -->
+                    <div class="border border-purple-900/40 bg-purple-950/10 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden group">
+                        <div>
+                            <h3 class="text-white font-bold mb-2 text-lg">Option B</h3>
+                            <p class="text-xs text-indigo-400 mb-4 font-semibold uppercase tracking-widest">Turnkey Launch (Starter)</p>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-6">We secure your domain, design your assets, and deploy a functioning landing page in 48 hours for immediate market validation.</p>
+                        </div>
+                        <div>
+                            <button onclick="openStripeModal()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold uppercase tracking-wider py-3 px-4 rounded-lg transition duration-200">
+                                Order Starter Pack
+                            </button>
+                        </div>
+                    </div>
 
-            <div class="space-y-6 border-t border-purple-950/40 pt-8 text-sm md:text-base">
-                <div>
-                    <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">1-Sentence Pitch</h3>
-                    <p id="showcase-pitch" class="text-slate-300">A premium, small-batch gourmet popcorn brand delivering high-energy, custom-flavored snack experiences for local communities, events, and gift-givers.</p>
-                </div>
-
-                <div>
-                    <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Target Audience</h3>
-                    <p id="showcase-audience" class="text-slate-300">Local families, school boosters, corporate event planners, and online snack enthusiasts.</p>
-                </div>
-
-                <div>
-                    <h3 class="text-white font-bold mb-2 uppercase tracking-wider text-xs text-purple-400">Core Strategy</h3>
-                    <p id="showcase-strategy" class="text-slate-300">Direct-to-consumer sales via local pop-ups, farmers' markets, school booster partnerships, and online subscription gift boxes.</p>
+                    <!-- Option C -->
+                    <div class="border border-emerald-900/20 bg-emerald-950/5 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer" onclick="openVentureModal()">
+                        <div>
+                            <h3 class="text-white font-bold mb-2 text-lg group-hover:text-emerald-400 transition-colors">Option C</h3>
+                            <p class="text-xs text-emerald-400 mb-4 font-semibold uppercase tracking-widest">EdgeDome Joint Venture</p>
+                            <p class="text-xs text-slate-300 leading-relaxed">Want a world-class Venture Studio to supply infrastructure, logic, and scales? EdgeDome Holdings LLC deploys full stacks for equity/royalties.</p>
+                        </div>
+                        <div class="mt-6 border-t border-emerald-950/40 pt-4 text-center">
+                            <span class="text-xs font-semibold text-emerald-400 group-hover:underline">Tap to Apply /build_venture</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- Next Steps Call to Action -->
-        <div class="mt-16 border-t border-purple-950/40 pt-12">
-            <h2 class="text-2xl font-black text-white text-center mb-8">Next Steps: How Would You Like to Build This?</h2>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Option A -->
-                <div class="border border-[#1f2833] bg-[#1f2833]/10 rounded-xl p-6 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-white font-bold mb-2 text-lg">Option A</h3>
-                        <p class="text-xs text-purple-400 mb-4 font-semibold uppercase tracking-widest">DIY Route (Free)</p>
-                        <p class="text-xs text-slate-400 leading-relaxed">(Take this strategy and build it yourself! (Proprietary EdgeDome backend platforms and systems remain sole IP of EdgeDome Holdings, LLC).</p>
-                    </div>
-                </div>
-
-                <!-- Option B -->
-                <div class="border border-purple-900/40 bg-purple-950/10 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden group">
-                    <div>
-                        <h3 class="text-white font-bold mb-2 text-lg">Option B</h3>
-                        <p class="text-xs text-indigo-400 mb-4 font-semibold uppercase tracking-widest">Turnkey Launch (Starter)</p>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-6">We secure your domain, design your assets, and deploy a functioning landing page in 48 hours for immediate market validation.</p>
-                    </div>
-                    <div>
-                        <button onclick="openStripeModal()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold uppercase tracking-wider py-3 px-4 rounded-lg transition duration-200">
-                            Order Starter Pack
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Option C -->
-                <div class="border border-emerald-900/20 bg-emerald-950/5 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer" onclick="openVentureModal()">
-                    <div>
-                        <h3 class="text-white font-bold mb-2 text-lg group-hover:text-emerald-400 transition-colors">Option C</h3>
-                        <p class="text-xs text-emerald-400 mb-4 font-semibold uppercase tracking-widest">EdgeDome Joint Venture</p>
-                        <p class="text-xs text-slate-300 leading-relaxed">Want a world-class Venture Studio to supply infrastructure, logic, and scales? EdgeDome Holdings LLC deploys full stacks for equity/royalties.</p>
-                    </div>
-                    <div class="mt-6 border-t border-emerald-950/40 pt-4 text-center">
-                        <span class="text-xs font-semibold text-emerald-400 group-hover:underline">Tap to Apply /build_venture</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Retention & Active Venture Expansion & Retainer Dashboard -->
-        <div class="mt-16 border-t border-purple-950/45 pt-12">
+        <!-- Retention & Active Venture Expansion & Retainer Dashboard (Hidden by default for returned founders verification) -->
+        <div class="mt-16 border-t border-purple-950/45 pt-12" id="client-portal-dashboard" style="display: none;">
             <div class="border border-purple-900/30 bg-[#1f2833]/15 rounded-2xl p-6 md:p-8 glow text-left">
                 <h3 class="text-lg font-bold text-white tracking-tight mb-2 flex items-center gap-2">
                     <span class="text-purple-400">🛠️</span> Active Venture Expansion & Retainer Dashboard
@@ -180,7 +184,7 @@
 
     </main>
 
-    <!-- Joint Venture Application Modal (Option C Card Trigger) -->
+    <!-- Joint Venture Application Modal -->
     <div id="ventureModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 modal-blur">
         <div class="bg-[#1f2833] border border-emerald-900/50 rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeVentureModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
@@ -250,7 +254,7 @@
             </div>
 
             <!-- California Compliance Banner & Ephemeral Data Warning (CCPA/CPRA Compliance) -->
-            <div class="mt-6 border-t border-emerald-950/40 pt-4 text-[10px] text-emerald-500/70 leading-relaxed text-center">
+            <div class="mt-6 border-t border-emerald-950/40 pt-4 text-[10px] text-emerald-500/70 leading-relaxed text-center font-medium">
                 <p><strong>🪪 CPRA/CCPA Statutory Compliance Shield:</strong> Photo ID data is processed strictly client-side to extract structural metadata, and all active layout segments are instantly flushed from execution thread cache post-validation. Absolutely zero persistent media images or identity document payloads are stored on EdgeDome cloud servers or disk storage systems.</p>
             </div>
             
@@ -316,6 +320,13 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- Active Client Infrastructure Access Entry Trigger -->
+    <div class="max-w-4xl mx-auto px-6 pb-4 text-center">
+        <button onclick="toggleClientPortal()" class="text-xs text-slate-500 hover:text-purple-400 transition-colors uppercase tracking-widest font-semibold inline-flex items-center gap-1.5 focus:outline-none">
+            🔒 Deployed Client Infrastructure Portal
+        </button>
     </div>
 
     <!-- Footer -->
@@ -423,6 +434,16 @@
             state.strategy = finalStrategy;
 
             renderState();
+
+            // Part 1: Unlock and Reveal Results block on Manifest action
+            const resultsBox = document.getElementById('showcase-results');
+            resultsBox.style.display = 'block';
+
+            // Smooth scroll directly to the newly revealed results container
+            document.getElementById('showcase-container').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
         // Stripe Sandbox Open
@@ -526,6 +547,20 @@
                 openStripeModal(`Retainer: "${reqVal}"`, amt);
             } else {
                 openStripeModal(`Retainer Upgrade: ${label}`, amt);
+            }
+        }
+
+        // Part 2: Interactive Access Segregation toggle for expansion portal
+        function toggleClientPortal() {
+            const portal = document.getElementById('client-portal-dashboard');
+            if (portal.style.display === 'none') {
+                portal.style.display = 'block';
+                portal.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                portal.style.display = 'none';
             }
         }
 
