@@ -541,7 +541,7 @@
             const reqVal = document.getElementById('retainer-input').value.trim();
             if (label === 'Custom Request Configuration') {
                 if (!reqVal) {
-                    alert('Please entering your short change instruction in the custom input area.');
+                    alert('Please enter your short change instruction in the custom input area.');
                     return;
                 }
                 openStripeModal(`Retainer: "${reqVal}"`, amt);
