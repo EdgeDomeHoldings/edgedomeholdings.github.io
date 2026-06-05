@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Stripe.js client library -->
     <script src="https://js.stripe.com/v3/"></script>
+    <link rel="manifest" href="manifest.json">
     <style>
         .glow { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
         .modal-blur { backdrop-filter: blur(8px); }
@@ -105,7 +106,7 @@
                 </div>
 
                 <!-- Option C -->
-                <div class="border border-emerald-950/20 bg-emerald-950/5 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer" onclick="openVentureModal()">
+                <div class="border border-emerald-900/20 bg-emerald-950/5 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer" onclick="openVentureModal()">
                     <div>
                         <h3 class="text-white font-bold mb-2 text-lg group-hover:text-emerald-400 transition-colors">Option C</h3>
                         <p class="text-xs text-emerald-400 mb-4 font-semibold uppercase tracking-widest">EdgeDome Joint Venture</p>
@@ -247,6 +248,12 @@
                     Close Screen
                 </button>
             </div>
+
+            <!-- California Compliance Banner & Ephemeral Data Warning (CCPA/CPRA Compliance) -->
+            <div class="mt-6 border-t border-emerald-950/40 pt-4 text-[10px] text-emerald-500/70 leading-relaxed text-center">
+                <p><strong>🪪 CPRA/CCPA Statutory Compliance Shield:</strong> Photo ID data is processed strictly client-side to extract structural metadata, and all active layout segments are instantly flushed from execution thread cache post-validation. Absolutely zero persistent media images or identity document payloads are stored on EdgeDome cloud servers or disk storage systems.</p>
+            </div>
+            
         </div>
     </div>
 
@@ -312,10 +319,18 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-purple-950/40 py-8 bg-[#0b0c10]">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-            <p>&copy; 2026 EdgeDome Holdings LLC. All rights reserved.</p>
-            <p class="text-slate-600">Enterprise Asset Framework v1.0.0 (Phantasus Active Hub)</p>
+    <footer class="border-t border-purple-950/45 py-8 bg-[#0b0c10]">
+        <div class="max-w-6xl mx-auto px-6 space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 EdgeDome Holdings LLC. All rights reserved.</p>
+                <p class="text-slate-600">Enterprise Asset Framework v1.0.0 (Phantasus Active Hub & PWA Node)</p>
+            </div>
+            
+            <!-- Corporate Legal Shield & California statutory privacy banner -->
+            <div class="border-t border-purple-950/30 pt-6 text-[10px] text-slate-600 space-y-3 leading-relaxed">
+                <p><strong>🛡️ Corporate Shield Warranty & Absolute Limitation of Liability:</strong> All software, dynamic business algorithms, blueprints, and turnkey layout components resolved or generated under incubator.edgedomeholdings.com are delivered strictly on an <strong>"As-Is"</strong> and <strong>"As-Available"</strong> structural basis without warranties of any kind, express or implied. EdgeDome Holdings LLC, alongside its parent enterprises, corporate partners, and executive officers, maintains complete legal immunization and assumes absolutely zero liability or operational responsibility for direct, subsequent, collateral, or punitive financial losses, enterprise failures, down-time, or downstream regulatory actions resulting from business actions, investments, or systems utilization executed by the client.</p>
+                <p><strong>🪪 California Consumer Privacy Act (CCPA) / CPRA Notice:</strong> Pursuant to California state statutory guidelines, this application interface enforces localized client-side ephemeral memory rules. Any photo identification document captured or dropped inside intake dialogs is scanned strictly in local active memory buffer threads to trigger structural form autofill metadata, and are entirely wiped/destroyed upon task completion. No document data remains permanently recorded, nor is any identity payload uploaded or written to persistent cloud server or physical disk storage layers.</p>
+            </div>
         </div>
     </footer>
 
@@ -512,6 +527,15 @@
             } else {
                 openStripeModal(`Retainer Upgrade: ${label}`, amt);
             }
+        }
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Registered Successfully:', reg.scope))
+                    .catch(err => console.error('Service Worker Registration Failed:', err));
+            });
         }
     </script>
 

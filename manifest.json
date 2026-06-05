@@ -1,0 +1,21 @@
+{
+  "short_name": "Phantasus",
+  "name": "Phantasus Incubator Hub",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/nolan/192/rocket.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://img.icons8.com/nolan/512/rocket.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#0a0f1d",
+  "theme_color": "#0a0f1d",
+  "display": "standalone",
+  "orientation": "portrait"
+}
