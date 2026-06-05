@@ -105,14 +105,73 @@
                 </div>
 
                 <!-- Option C -->
-                <div class="border border-emerald-900/40 bg-emerald-950/10 rounded-xl p-6 flex flex-col justify-between">
+                <div class="border border-emerald-950/20 bg-emerald-950/5 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer" onclick="openVentureModal()">
                     <div>
-                        <h3 class="text-white font-bold mb-2 text-lg">Option C</h3>
+                        <h3 class="text-white font-bold mb-2 text-lg group-hover:text-emerald-400 transition-colors">Option C</h3>
                         <p class="text-xs text-emerald-400 mb-4 font-semibold uppercase tracking-widest">EdgeDome Joint Venture</p>
                         <p class="text-xs text-slate-300 leading-relaxed">Want a world-class Venture Studio to supply infrastructure, logic, and scales? EdgeDome Holdings LLC deploys full stacks for equity/royalties.</p>
                     </div>
                     <div class="mt-6 border-t border-emerald-950/40 pt-4 text-center">
-                        <span class="text-xs font-semibold text-emerald-400">Reply /build_venture to apply</span>
+                        <span class="text-xs font-semibold text-emerald-400 group-hover:underline">Tap to Apply /build_venture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Retention & Active Venture Expansion & Retainer Dashboard -->
+        <div class="mt-16 border-t border-purple-950/45 pt-12">
+            <div class="border border-purple-900/30 bg-[#1f2833]/15 rounded-2xl p-6 md:p-8 glow text-left">
+                <h3 class="text-lg font-bold text-white tracking-tight mb-2 flex items-center gap-2">
+                    <span class="text-purple-400">🛠️</span> Active Venture Expansion & Retainer Dashboard
+                </h3>
+                <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+                    Have an active EdgeDome enterprise or deployed starter pack? Instantly trigger on-demand micro-pivots or execute scale micro-transactions to boost your active pipeline metrics.
+                </p>
+
+                <!-- Retainer Custom Request Bar -->
+                <div class="mb-8">
+                    <label class="block text-[10px] uppercase font-bold tracking-widest text-purple-400 mb-2">Configure custom retainer request</label>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="retainer-input" placeholder="e.g. Add an organic product tier to my store..." class="flex-grow bg-[#0b0c10] border border-purple-950 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-purple-600 transition placeholder:text-slate-600">
+                        <button onclick="triggerRetainer('Custom Request Configuration', 199.00)" class="bg-purple-950/50 hover:bg-purple-900 text-purple-300 border border-purple-800 font-bold text-[10px] uppercase tracking-wider py-3 px-5 rounded-xl transition duration-200">
+                            Apply Request ($199)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upgrades Grid -->
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div onclick="triggerRetainer('E-Commerce Engine', 399.00)" class="border border-purple-950 hover:border-purple-500/40 bg-[#0b0c10]/40 p-4 rounded-xl cursor-pointer transition-all hover:bg-purple-955 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Inject E-Commerce Engine</h4>
+                            <p class="text-[10px] text-slate-400 leading-snug">Deploy Stripe checkout modules, full inventory schemas, and automated digital fulfillment routes.</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xs font-black text-emerald-400">$399.00</span>
+                            <span class="text-[9px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-950/60 py-0.5 px-2 rounded-md">Deploy</span>
+                        </div>
+                    </div>
+
+                    <div onclick="triggerRetainer('SMS Automation Hub', 299.00)" class="border border-purple-950 hover:border-purple-500/40 bg-[#0b0c10]/40 p-4 rounded-xl cursor-pointer transition-all hover:bg-purple-955 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Deploy SMS Automation Hub</h4>
+                            <p class="text-[10px] text-slate-400 leading-snug">Bind high-conversion automated SMS funnels, tracking APIs, and client recovery webhooks.</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xs font-black text-emerald-400">$299.00</span>
+                            <span class="text-[9px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-950/60 py-0.5 px-2 rounded-md">Deploy</span>
+                        </div>
+                    </div>
+
+                    <div onclick="triggerRetainer('Local SEO Footprint Scale', 499.00)" class="border border-purple-950 hover:border-purple-500/40 bg-[#0b0c10]/40 p-4 rounded-xl cursor-pointer transition-all hover:bg-purple-955 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Scale SEO Footprint</h4>
+                            <p class="text-[10px] text-slate-400 leading-snug">Generate localized content engines, structured landing layouts, and search visibility signals.</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xs font-black text-emerald-400">$499.00</span>
+                            <span class="text-[9px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-950/60 py-0.5 px-2 rounded-md">Deploy</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,13 +179,84 @@
 
     </main>
 
+    <!-- Joint Venture Application Modal (Option C Card Trigger) -->
+    <div id="ventureModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 modal-blur">
+        <div class="bg-[#1f2833] border border-emerald-900/50 rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeVentureModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            
+            <div class="text-center mb-6">
+                <span class="text-[10px] bg-emerald-950 border border-emerald-800 text-emerald-300 px-2.5 py-0.5 rounded uppercase tracking-wider font-semibold">Alliance Protocol</span>
+                <h3 class="text-xl font-bold text-white mt-3">Option C: EdgeDome Venture Application</h3>
+                <p class="text-xs text-slate-400 mt-1">Deploy unified operational architecture, technology stacks, and assets in a structured partnership pipeline.</p>
+            </div>
+
+            <!-- Upload Container -->
+            <div class="mb-5">
+                <label class="block text-xs uppercase tracking-wider font-bold text-emerald-400 mb-2">Government Verification</label>
+                <div class="border-2 border-dashed border-emerald-900/60 rounded-xl bg-[#0b0c10]/60 p-5 text-center cursor-pointer hover:border-emerald-500/40 transition relative group" id="upload-zone" onclick="triggerMockIDUpload()">
+                    <div class="space-y-2 pointer-events-none">
+                        <span class="text-3xl text-emerald-500 block">🪪</span>
+                        <p class="text-xs text-white font-bold group-hover:text-emerald-400 transition" id="upload-text">Tap to Snap or Upload Government ID</p>
+                        <p class="text-[10px] text-slate-500 whitespace-normal">Secure real-time evaluation. Zero document files are permanently stored on EdgeDome infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Joint Venture Intake Form -->
+            <form onsubmit="submitFormMock(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Managing Founder Name</label>
+                    <input type="text" id="founder-name" required placeholder="Awaiting Verification Handshake..." class="w-full bg-[#0b0c10] border border-purple-950 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-emerald-500 transition">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Direct Secure Email</label>
+                    <input type="email" required placeholder="founder@yoursecuremail.com" class="w-full bg-[#0b0c10] border border-purple-950 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-emerald-500 transition">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Studio Equity Allocation</label>
+                        <select required class="w-full bg-[#0b0c10] border border-purple-950 rounded-lg p-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500 transition">
+                            <option value="15%">15% Equity Retention</option>
+                            <option value="20%">20% Equity Retention</option>
+                            <option value="royalty">10% Gross Revenue Royalty</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Core Mastery Domain</label>
+                        <select required class="w-full bg-[#0b0c10] border border-purple-950 rounded-lg p-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500 transition">
+                            <option value="arbitrage">DTC Arbitrage Logistics</option>
+                            <option value="saas">SaaS Micro-Platform Scaling</option>
+                            <option value="media">SaaS Media Engine Operations</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="venture-submit" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white text-xs font-bold uppercase tracking-wider py-4 rounded-xl transition duration-200 shadow-lg shadow-emerald-950/40">
+                    Submit Joint Alliance Framework
+                </button>
+            </form>
+
+            <div id="venture-success" class="hidden text-center py-6 space-y-4">
+                <div class="mx-auto w-16 h-16 bg-emerald-950 border border-emerald-500 rounded-full flex items-center justify-center text-emerald-400 text-3xl font-extrabold shadow-lg">✓</div>
+                <div>
+                    <h4 class="text-white text-lg font-bold">Alliance Protocol Deployed</h4>
+                    <p class="text-xs text-slate-400 max-w-sm mx-auto mt-2">The operational criteria have been saved, and our screening system has recorded the allocation handshake. Secure routing initiated.</p>
+                </div>
+                <button onclick="closeVentureModal()" class="bg-[#0b0c10] border border-slate-700 hover:border-white text-xs uppercase tracking-widest text-[#c5c6c7] px-6 py-2 rounded-lg transition duration-200">
+                    Close Screen
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Stripe Checkout Simulator Modal -->
     <div id="stripeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 modal-blur">
         <div class="bg-[#1f2833] border border-purple-900/50 rounded-2xl max-w-md w-full p-6 md:p-8 shadow-2xl relative">
             <button onclick="closeStripeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
             
             <div class="text-center mb-6">
-                <span class="text-xs bg-purple-950 border border-purple-800 text-purple-300 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Stripe Sandbox Integration</span>
+                <span class="text-xs bg-purple-950 border border-purple-800 text-purple-300 px-2.5 py-0.5 rounded uppercase tracking-wider font-semibold">Stripe Sandbox Integration</span>
                 <h3 id="modal-title" class="text-xl font-bold text-white mt-3">Deploy EverythingPops (Starter)</h3>
                 <p class="text-xs text-slate-400 mt-1">Order processed securely via EdgeDome Holdings LLC sandbox.</p>
             </div>
@@ -158,13 +288,13 @@
                 <div class="border-t border-purple-950/40 my-6 pt-4 flex items-center justify-between">
                     <div>
                         <span class="text-xs uppercase text-slate-400 block">Total Due</span>
-                        <span class="text-2xl font-black text-white">$499.00 USD</span>
+                        <span id="modal-cost" class="text-2xl font-black text-white">$499.00 USD</span>
                     </div>
                     <span class="text-[10px] text-slate-500 italic max-w-[150px] text-right">No real capital will be transacted.</span>
                 </div>
 
                 <button type="submit" id="submit-button" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white text-sm font-bold uppercase tracking-wider py-4 rounded-xl transition duration-200 shadow-lg shadow-emerald-950/40">
-                    Authorize & Launch ($499.00)
+                    Authorize & Launch
                 </button>
             </form>
 
@@ -280,10 +410,25 @@
             renderState();
         }
 
-        function openStripeModal() {
+        // Stripe Sandbox Open
+        function openStripeModal(titleOverride, costOverride) {
             document.getElementById('stripeModal').classList.remove('hidden');
             document.getElementById('payment-form').classList.remove('hidden');
             document.getElementById('payment-success').classList.add('hidden');
+            
+            if (titleOverride) {
+                document.getElementById('modal-title').textContent = titleOverride;
+            } else {
+                document.getElementById('modal-title').textContent = `Deploy ${state.name} (Starter)`;
+            }
+
+            if (costOverride) {
+                document.getElementById('modal-cost').textContent = `$${costOverride.toFixed(2)} USD`;
+                document.getElementById('submit-button').textContent = `Authorize & Launch ($${costOverride.toFixed(2)})`;
+            } else {
+                document.getElementById('modal-cost').textContent = `$499.00 USD`;
+                document.getElementById('submit-button').textContent = `Authorize & Launch ($499.00)`;
+            }
         }
 
         function closeStripeModal() {
@@ -293,15 +438,80 @@
         function handleMockPayment(event) {
             event.preventDefault();
             const btn = document.getElementById('submit-button');
+            const prevText = btn.textContent;
             btn.innerHTML = `Processing Secure Handshake...`;
             btn.disabled = true;
 
             setTimeout(() => {
                 document.getElementById('payment-form').classList.add('hidden');
                 document.getElementById('payment-success').classList.remove('hidden');
-                btn.innerHTML = `Authorize & Launch ($499.00)`;
+                btn.innerHTML = prevText;
                 btn.disabled = false;
             }, 1800);
+        }
+
+        // Venture Modal Operations (Option C Intake)
+        function openVentureModal() {
+            document.getElementById('ventureModal').classList.remove('hidden');
+            // reset application states
+            document.getElementById('payment-form').classList.remove('hidden');
+            document.getElementById('venture-success').classList.add('hidden');
+            
+            // Clear mock document zone
+            const uploadZone = document.getElementById('upload-zone');
+            uploadZone.className = "border-2 border-dashed border-emerald-900/60 rounded-xl bg-[#0b0c10]/60 p-5 text-center cursor-pointer hover:border-emerald-500/40 transition relative group";
+            document.getElementById('upload-text').textContent = "Tap to Snap or Upload Government ID";
+            document.getElementById('founder-name').value = "";
+            document.getElementById('founder-name').className = "w-full bg-[#0b0c10] border border-purple-950 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-emerald-500 transition";
+        }
+
+        function closeVentureModal() {
+            document.getElementById('ventureModal').classList.add('hidden');
+        }
+
+        function triggerMockIDUpload() {
+            const uploadZone = document.getElementById('upload-zone');
+            const uploadText = document.getElementById('upload-text');
+            const founderInput = document.getElementById('founder-name');
+
+            uploadText.textContent = "Scanning Authenticating Document Layout...";
+            uploadZone.className = "border-2 border-dashed border-emerald-500 bg-emerald-950/25 rounded-xl p-5 text-center cursor-pointer transition relative group";
+
+            setTimeout(() => {
+                uploadText.textContent = "🪪 ALEXANDER_MERCER_ID.JPG (Verified Handshake Clear)";
+                founderInput.value = "ALEXANDER J. MERCER";
+                founderInput.className = "w-full bg-[#0b0c10] border-2 border-emerald-500 rounded-lg p-3 text-xs text-white focus:outline-none transition";
+            }, 1200);
+        }
+
+        function submitFormMock(event) {
+            event.preventDefault();
+            const btn = document.getElementById('venture-submit');
+            btn.innerHTML = `Encoding Immutable Alliance Handshake...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = `Submit Joint Alliance Framework`;
+                
+                // Hide forms, show success
+                event.target.classList.add('hidden');
+                document.getElementById('venture-success').classList.remove('hidden');
+            }, 1500);
+        }
+
+        // Retainer Engine Actions
+        function triggerRetainer(label, amt) {
+            const reqVal = document.getElementById('retainer-input').value.trim();
+            if (label === 'Custom Request Configuration') {
+                if (!reqVal) {
+                    alert('Please entering your short change instruction in the custom input area.');
+                    return;
+                }
+                openStripeModal(`Retainer: "${reqVal}"`, amt);
+            } else {
+                openStripeModal(`Retainer Upgrade: ${label}`, amt);
+            }
         }
     </script>
 
